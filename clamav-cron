@@ -25,7 +25,7 @@ CV_SUBJECT="ABC Corp. - ClamAV scan report"
 #============================================#
 
 CV_TARGET="$1"
-CV_VERSION="0.6"
+CV_VERSION="0.7"
 
 if [ -e $CV_LOGFILE ]
 then
@@ -56,9 +56,11 @@ CLAMSCAN=$?
 if [ "$CLAMSCAN" -eq "1" ]
 then
 	CV_SUBJECT="[VIRUS!] "$CV_SUBJECT
+	/bin/mail -s "$CV_SUBJECT" $CV_MAILTO -- -f $CV_MAILFROM < $CV_LOGFILE
 elif [ "$CLAMSCAN" -gt "1" ]
 then
 	CV_SUBJECT="[ERR] "$CV_SUBJECT
+	/bin/mail -s "$CV_SUBJECT" $CV_MAILTO -- -f $CV_MAILFROM < $CV_LOGFILE
 fi
 
-/bin/mail -s "$CV_SUBJECT" $CV_MAILTO -- -f $CV_MAILFROM < $CV_LOGFILE
+exit 0

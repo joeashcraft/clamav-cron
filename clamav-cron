@@ -8,10 +8,10 @@
 #============================================#
 
 # Log file name and its path:
-CV_LOGFILE="$HOME/clamav-cron.log"
+CV_LOGFILE="/var/log/clamav-cron.log"
 
 # Notification e-mail sender (could be fake):
-CV_MAILFROM="clamav@abc.com"
+CV_MAILFROM="root@`hostname`"
 
 # Notification e-mail recipient:
 CV_MAILTO="paolo@abc.com"
@@ -20,7 +20,7 @@ CV_MAILTO="paolo@abc.com"
 CV_MAILTO_CC="stefano@abc.com; danilo@abc.com"
 
 # Notification e-mail subject:
-CV_SUBJECT="ABC Corp. - ClamAV scan report"
+CV_SUBJECT="[`hostname`] - ClamAV scan report"
 
 #============================================#
 
@@ -34,7 +34,7 @@ fi
 
 if [ -z "$1" ]
 then
-	CV_TARGET="$HOME"
+	CV_TARGET="/var/www/"
 fi
 
 #To be read on stdout (and root mail):
